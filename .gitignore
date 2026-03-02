@@ -1,0 +1,40 @@
+# Data files
+data/raw/
+data/processed/
+data_cache/  # Cache directory for downloaded data
+*.csv
+*.parquet
+*.h5
+*.pkl
+
+# Reports and figures
+reports/figures/
+*.png
+*.jpg
+*.pdf
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,59 @@
+# Cross-Asset Momentum Regime Classifier Configuration
+
+data:
+  start_date: '2020-01-01'
+  end_date: '2024-12-31'
+  
+  # Data source configuration
+  # Priority order: sources are tried in sequence until data is found
+  # Options: 'fred' (best for macro), 'local' (CSV files), 'yfinance' (fallback)
+  sources:
+    - fred      # Federal Reserve Economic Data (free, stable, best for macro indicators)
+    - local     # Local CSV files in data/ directory (most reliable)
+    - yfinance  # Yahoo Finance (free but rate-limited, fallback option)
+  
+  # FRED API key (optional, free from https://fred.stlouisfed.org/docs/api/api_key.html)
+  # Can also set FRED_API_KEY environment variable instead
+  fred_api_key: '2c8ab531d7c497666646fd46c10a2ad6'
+  
+  # Directory for local CSV files (default: 'data')
+  # data_dir: 'data'
+  
+  equity:
+    symbols:
+      - SPY  # S&P 500
+      - QQQ  # Nasdaq 100
+      - IWM  # Russell 2000
+  
+  fx:
+    symbols:
+      - EURUSD=X  # EUR/USD
+      - GBPUSD=X  # GBP/USD
+      - JPYUSD=X  # JPY/USD (inverse)
+      - AUDUSD=X  # AUD/USD
+      - CADUSD=X  # CAD/USD
+  
+  macro:
+    symbols:
+      - ^VIX      # VIX volatility index
+      - ^TNX      # 10-year Treasury yield
+      - ^IRX      # 3-month Treasury yield
+      - DX-Y.NYB  # US Dollar Index
+
+signals:
+  momentum:
+    lookback_days: 252  # 12 months
+    lag_days: 21        # 1 month lag
+  
+  carry:
+    lookback_days: 252
+
+regime:
+  n_states: 2
+  n_iter: 100
+  random_state: 42
+
+backtest:
+  initial_capital: 100000
+  transaction_cost_bps: 5  # 0.05% per trade
+  slippage_bps: 2          # 0.02% slippage
